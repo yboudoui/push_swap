@@ -5,92 +5,117 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/14 13:44:44 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/15 16:24:22 by yboudoui         ###   ########.fr        #
+#    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
+#    Updated: 2022/08/22 18:03:48 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	push_swap
 
-#-----------------------------------------------------------------------------#
+CC					=	cc
 
-UTILS_DIR			=	utils/
-
-UTILS_FILES_HEADER	=	utils.h
-
-UTILS_FILES_SRC		=	ft_t_str.c\
-						ft_allocate.c\
-						ft_is_in_set.c\
-						ft_atoi_and_skip.c\
-						ft_itoa_base.c
-
-UTILS_HEADER		=	$(addprefix $(UTILS_DIR), $(UTILS_FILES_HEADER))
-
-UTILS_SRC			=	$(addprefix $(UTILS_DIR), $(UTILS_FILES_SRC))
-
-UTILS_OBJS			=	$(UTILS_SRC:.c=.o)
-
-#-----------------------------------------------------------------------------#
-
-FORMATER_DIR			=	formater/
-
-FORMATER_FILES_HEADER	=	formater.h
-
-FORMATER_FILES_SRC		=	ft_flags_handler.c\
-							ft_parser.c\
-							ft_type_scalar.c\
-							ft_type_string.c
-
-FORMATER_HEADER			=	$(addprefix $(FORMATER_DIR), $(FORMATER_FILES_HEADER))
-
-FORMATER_SRC			=	$(addprefix $(FORMATER_DIR), $(FORMATER_FILES_SRC))
-
-FORMATER_OBJS			=	$(FORMATER_SRC:.c=.o)
-
-#-----------------------------------------------------------------------------#
-
-DIR					=	./
-
-FILES_HEADER		=	ft_printf.h
-
-FILES_SRC			=	ft_printf.c\
-						ft_tokeniser.c
-
-SRC					=	$(addprefix $(DIR), $(FILES_SRC))
-
-HEADER				=	$(addprefix $(DIR), $(FILES_HEADER))
-
-OBJS				=	$(SRC:.c=.o)
-
-#-----------------------------------------------------------------------------#
-
-CC					=	gcc
-
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror
 
 RM					=	rm -f
 
-.c.o:
-			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+# **************************************************************************** #
 
-$(NAME):	$(UTILS_OBJS) $(FORMATER_OBJS) $(OBJS)
-				$(MAKE) bonus -C ./libft
-				cp ./libft/libft.a .
-				mv libft.a $(NAME)
-				ar rcs $(NAME) $(UTILS_OBJS) $(FORMATER_OBJS) $(OBJS)
+MEMORY_DIR			=	memory/
+
+MEMORY_SRC			=	$(addprefix $(MEMORY_DIR),			\
+						ft_memset.c							\
+						ft_memcpy.c							\
+						ft_memmove.c						\
+						ft_memchr.c							\
+						ft_memcmp.c							\
+						ft_calloc.c							\
+						)
+
+MEMORY_INC			=	$(addprefix $(MEMORY_DIR),			\
+						.									\
+						)
+
+# **************************************************************************** #
+
+CHARSET_DIR			=	is_charset/
+
+CHARSET_SRC			=	$(addprefix $(CHARSET_DIR),			\
+						is_charset.c						\
+						)
+
+CHARSET_INC			=	$(addprefix $(CHARSET_DIR),			\
+						.									\
+						)
+
+# **************************************************************************** #
+
+UTILS_DIR			=	utils/
+
+UTILS_SRC			=	$(addprefix $(UTILS_DIR),			\
+						$(MEMORY_SRC)						\
+						$(CHARSET_SRC)						\
+						ft_atoi.c							\
+						)
+
+UTILS_INC			=	$(addprefix $(UTILS_DIR),			\
+						$(MEMORY_INC)						\
+						$(CHARSET_INC)						\
+						.									\
+						)
+
+# **************************************************************************** #
+
+PARSE_DIR			=	parse/
+
+PARSE_SRC			=	$(addprefix $(PARSE_DIR),			\
+						parse.c								\
+						)
+
+PARSE_INC			=	$(addprefix $(PARSE_DIR),			\
+						.									\
+						)
+
+# **************************************************************************** #
+
+STACKS_DIR			=	stacks/
+
+STACKS_SRC			=	$(addprefix $(STACKS_DIR),			\
+						$(UTILS_SRC)						\
+						$(PARSE_SRC)						\
+						stacks.c							\
+						)
+
+STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
+						$(UTILS_INC)						\
+						$(PARSE_DIR)						\
+						.									\
+						)
+
+# **************************************************************************** #
+
+SRCS				=	$(STACKS_SRC)				\
+						main.c						\
+
+INCS				=	$(STACKS_INC)				\
+
+OBJS				=	$(SRCS:.c=.o)
+
+.c.o:
+	$(CC) $(CFLAGS)	\
+		$(addprefix -I , $(INCS))	\
+		-c $<	\
+		-o $(<:.c=.o)	\
+
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) -o $(NAME)\
+		$(OBJS)
 
 all:		$(NAME)
 
-bonus:		all
-
 clean:
-				$(MAKE) clean -C ./libft
-				$(RM) $(UTILS_OBJS) $(FORMATER_OBJS) $(OBJS)
+			$(RM) $(OBJS)
 
 fclean:		clean
-				$(MAKE) fclean -C ./libft
-				$(RM) $(NAME)
+			$(RM) $(NAME)
 
 re:			fclean all
-
-.PHONY:		all clean fclean re

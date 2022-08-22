@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   median.h                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 15:23:47 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/16 16:30:13 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/08/21 21:07:00 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/08/21 22:43:23 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEDIAN_H
-# define MEDIAN_H
+#include "memory.h"
 
-typedef enum e_median {
-	FIRST, SECOND, THIRD,
-	MAX_MEDIAN,
-}	t_median;
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	unsigned char	*d;
+	unsigned char	*s;
 
-typedef enum e_stack {
-	A, B, MAX_STACKS
-}	t_stack;
-
-typedef struct	s_median {
-	t_data	median[MAX_MEDIAN];
-	
-}	t_median;
-
-typedef struct s_push_swap_data {
-	t_median	median;
-	t_data		stacks[MAX_STACKS];
-}	t_push_swap_data;
-#endif
-
+	if (!dest || !src)
+		return (dest);
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	while (n--)
+		*d++ = *s++;
+	return (dest);
+}
