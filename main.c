@@ -6,63 +6,37 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/22 19:31:19 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/24 09:46:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stacks.h"
+#include "instruction.h"
 
 #include <stdio.h>
 
-void	ft_itoa(char *out, int n)
+void	print_int_ptr(int *ptr)
 {
-	int			size;
-	long int	m;
-	long int	ntmp1;
-	long int	ntmp2;
-
-	size = 0;
-	while (size < 20)
-		out[size++] = 0;
-	m = n;
-	size = (m <= 0);
-	ntmp1 = m * ((m >= 0) - (m < 0));
-	while (ntmp1 > 0)
-	{
-		ntmp1 /= 10;
-		size++;
-	}
-	out[0] = '-';
-	ntmp2 = m * ((m >= 0) - (m < 0));
-	while (--size >= (m < 0))
-	{
-		out[size] = '0' + (ntmp2 % 10);
-		ntmp2 /= 10;
-	}
-}
-
-char	*print_int_ptr(char *str, int *ptr)
-{
+	printf("[ %11p - ", ptr);
 	if (!ptr)
-		str = "-";
+		printf("%11c ]", '-');
 	else
-		ft_itoa(str, *ptr);
-	return (str);
+		printf("%11d ]", *ptr);
 }
 
 void	print(t_stacks stacks)
 {
 	size_t	index;
-	char	str[20];
 
 	index = stacks.tab.len;
-	printf("	A		B\n");
+	printf("\n------------------------------------------------------\n");
+	printf("stack\t\t\tA\t\tB\n");
+	printf("size\t\t\t%zu\t\t%zu\n", stacks.a.last_index, stacks.b.last_index);
 	while (index--)
 	{
-		printf("[ %11s ]	[ %11s ]\n",
-			print_int_ptr(str, stacks.a[index]),
-			print_int_ptr(str, stacks.b[index])
-		);
+		printf("\n-%11zu- ", index);
+		print_int_ptr(stacks.a.data[index]);
+		print_int_ptr(stacks.b.data[index]);
 	}
 }
 
@@ -70,10 +44,45 @@ int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
 
-	(void)ac;
-	if (!ft_new_stacks(&stacks, av + 1))
-		return (printf("error\n"), -1);
+	if (!ft_new_stacks(&stacks, ac - 1, av + 1))
+		return (print(stacks), printf("error\n"), -1);
 	print(stacks);
+
+	ft_ra(&stacks);
+	print(stacks);
+
+	ft_sa(&stacks);
+	print(stacks);
+
+	ft_pb(&stacks);
+	ft_pb(&stacks);
+	print(stacks);
+
+	ft_sb(&stacks);
+	ft_rra(&stacks);
+	print(stacks);
+
+	ft_ra(&stacks);
+	print(stacks);
+
+	ft_sa(&stacks);
+	print(stacks);
+
+
+	ft_pb(&stacks);
+	ft_pb(&stacks);
+	ft_pb(&stacks);
+	ft_pb(&stacks);
+	ft_pb(&stacks);
+
+	print(stacks);
+
+	ft_sa(&stacks);
+	print(stacks);
+
+	ft_sb(&stacks);
+	print(stacks);
+
 	ft_free_stacks(stacks);
 	return (0);
 }

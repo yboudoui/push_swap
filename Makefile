@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/22 18:03:48 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/08/23 09:11:59 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME				=	push_swap
 
 CC					=	cc
 
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -g3
 
 RM					=	rm -f
 
@@ -77,17 +77,36 @@ PARSE_INC			=	$(addprefix $(PARSE_DIR),			\
 
 # **************************************************************************** #
 
+INSTRUCTION_DIR		=	instruction/
+
+INSTRUCTION_SRC		=	$(addprefix $(INSTRUCTION_DIR),		\
+						instruction.c						\
+						push.c								\
+						reverse_rotate.c					\
+						rotate.c							\
+						swap.c								\
+						)
+
+INSTRUCTION_INC		=	$(addprefix $(INSTRUCTION_DIR),		\
+						.									\
+						)
+
+# **************************************************************************** #
+
+
 STACKS_DIR			=	stacks/
 
 STACKS_SRC			=	$(addprefix $(STACKS_DIR),			\
 						$(UTILS_SRC)						\
 						$(PARSE_SRC)						\
+						$(INSTRUCTION_SRC)					\
 						stacks.c							\
 						)
 
 STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
 						$(UTILS_INC)						\
-						$(PARSE_DIR)						\
+						$(PARSE_INC)						\
+						$(INSTRUCTION_INC)					\
 						.									\
 						)
 

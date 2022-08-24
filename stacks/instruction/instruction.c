@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:33:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/22 19:40:44 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/24 09:47:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,63 +21,41 @@ static void	ft_int_ptr_swap(t_int_ptr *a, t_int_ptr *b)
 	(*b) = tmp;
 }
 
-void	ft_swap(t_stack s)
+void	ft_swap(t_stack *s)
 {
-	if (s.current_size < 2)
+	size_t	index;
+
+	if (s->last_index < 1)
+		return ;
+	index = s->last_index - 1;
+	ft_int_ptr_swap(
+		&s->data[index],
+		&s->data[index - 1]);
+}
+
+void	ft_push(t_stack *from, t_stack *to)
+{
+	if (from->last_index == 0)
 		return ;
 	ft_int_ptr_swap(
-		s.data[s.current_size],
-		s.data[s.current_size - 1]
-	);
+		&(from->data[from->last_index - 1]),
+		&(to->data[to->last_index]));
+	from->last_index -= 1;
+	to->last_index += 1;
 }
 
-void	ft_push(t_stack from, t_stack to)
+void	ft_rotate(bool reverse, t_stack *s)
 {
-	ft_int_ptr_swap(
-		from.data[from.current_size],
-		to.data[to.current_size + 1]
-	);
-	from.current_size -= 1;
-	to.current_size += 1;
-}
+	t_int_ptr	tmp;
+	size_t		index;
 
-void	ft_rotate(bool reverse, t_stack s)
-{
-	t_int_ptr	*tmp;
-
-	tmp = s.data[(current_size * !reverse)];
+	if (s->last_index < 2)
+		return ;
+	index = s->last_index - 1;
+	tmp = s->data[(index * !reverse)];
 	ft_memmove(
-		&s.data[!reverse],
-		&s.data[reverse],
-		(s.current_size - 1) * sizeof(int *)
-	);
-	s.data[(current_size * reverse)] = tmp;
+		&(s->data[!reverse]),
+		&(s->data[reverse]),
+		(index) * sizeof(int *));
+	s->data[(index * reverse)] = tmp;
 }
-
-/*
-void	ft_rotate(t_stack s)
-{
-	t_int_ptr	*tmp;
-
-	tmp = s.data[current_size];
-	ft_memmove(
-		&s.data[1],
-		&s.data[0],
-		(s.current_size - 1) * sizeof(int *)
-	);
-	s.data[0] = tmp;
-}
-
-void	ft_reverse_rotate(t_stack d)
-{
-	t_int_ptr	*tmp;
-
-	tmp = s.data[0];
-	ft_memmove(
-		&s.data[0],
-		&s.data[1],
-		(s.current_size - 1) * sizeof(int *)
-	);
-	s.data[current_size] = tmp;
-}
-*/

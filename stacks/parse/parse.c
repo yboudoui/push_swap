@@ -6,12 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/22 15:16:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:06:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
+/*
 static bool	ft_parse_string_to_int_array(t_int_array *out, char *str)
 {
 	size_t	index;
@@ -44,7 +44,7 @@ static bool	ft_join_int_array(t_int_array *out, t_int_array in)
 	free(out->array);
 	return (*out = (t_int_array){tmp, out->len + in.len}, true);
 }
-
+*/
 static bool	ft_check_double(t_int_array *out)
 {
 	size_t	index_a;
@@ -57,7 +57,7 @@ static bool	ft_check_double(t_int_array *out)
 		while (index_b < out->len)
 		{
 			if (out->array[index_a] == out->array[index_b])
-				return (false);
+				return (free(out), false);
 			index_b++;
 		}
 		index_a++;
@@ -65,22 +65,25 @@ static bool	ft_check_double(t_int_array *out)
 	return (true);
 }
 
-bool	ft_parse_input(t_int_array *out, char *av[])
+static bool	ft_alloc_int_array(t_int_array *out, size_t len)
+{
+	out->len = len;
+	out->array = ft_calloc(out->len, sizeof(int));
+	return (out->array);
+}
+
+bool	ft_parse_input(t_int_array *out, int ac, char *av[])
 {
 	size_t		index;
-	t_int_array	tmp;
 
-	(*out) = (t_int_array){NULL, 0};
+	if (!ft_alloc_int_array(out, ac))
+		return (false);
 	index = 0;
 	while (av[index])
 	{
-		if (!ft_parse_string_to_int_array(&tmp, av[index]))
-			return (free(out->array), false);
-		if (!ft_join_int_array(out, tmp))
+		if (!ft_atoi_to(&av[index], &out->array[ac - 1 - index]))
 			return (free(out->array), false);
 		index++;
 	}
-	if (!ft_check_double(out))
-		return (free(out->array), false);
-	return (true);
+	return (ft_check_double(out));
 }
