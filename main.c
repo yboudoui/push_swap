@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/24 09:46:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:33:09 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ void	print(t_stacks stacks)
 {
 	size_t	index;
 
-	index = stacks.tab.len;
 	printf("\n------------------------------------------------------\n");
+	index = stacks.median.len;
+	printf("median len : %zu\n", index);
+	while (index--)
+		printf("%d ", stacks.median.array[index]);
+	printf("\n------------------------------------------------------\n");
+	index = stacks.tab.len;
 	printf("stack\t\t\tA\t\tB\n");
 	printf("size\t\t\t%zu\t\t%zu\n", stacks.a.last_index, stacks.b.last_index);
 	while (index--)

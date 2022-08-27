@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/23 09:11:59 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/08/27 13:09:43 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,18 @@ PARSE_INC			=	$(addprefix $(PARSE_DIR),			\
 
 # **************************************************************************** #
 
+MEDIAN_DIR			=	median/
+
+MEDIAN_SRC			=	$(addprefix $(MEDIAN_DIR),			\
+						median.c							\
+						)
+
+MEDIAN_INC			=	$(addprefix $(MEDIAN_DIR),			\
+						.									\
+						)
+
+# **************************************************************************** #
+
 INSTRUCTION_DIR		=	instruction/
 
 INSTRUCTION_SRC		=	$(addprefix $(INSTRUCTION_DIR),		\
@@ -99,6 +111,7 @@ STACKS_DIR			=	stacks/
 STACKS_SRC			=	$(addprefix $(STACKS_DIR),			\
 						$(UTILS_SRC)						\
 						$(PARSE_SRC)						\
+						$(MEDIAN_SRC)						\
 						$(INSTRUCTION_SRC)					\
 						stacks.c							\
 						)
@@ -106,6 +119,7 @@ STACKS_SRC			=	$(addprefix $(STACKS_DIR),			\
 STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
 						$(UTILS_INC)						\
 						$(PARSE_INC)						\
+						$(MEDIAN_INC)						\
 						$(INSTRUCTION_INC)					\
 						.									\
 						)

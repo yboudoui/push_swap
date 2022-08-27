@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   condition.c                                        :+:      :+:    :+:   */
+/*   median.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/09 14:59:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/09 15:04:15 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/08/27 10:00:06 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/08/27 13:17:26 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef bool	(*t_bool)(void *);
-typedef void	(*t_make)(void *);
+#ifndef MEDIAN_H
+# define MEDIAN_H
 
-typedef struct	s_condition {
-	t_bool	eval;
-	t_make	succes;
-	t_make	failur;
-}	t_condition;
+# include "parse.h"
 
-inline void	condition_eval(t_condition *e, void *data)
-{
-	if (e.eval(data))
-		e.succes(data);
-	else
-		e.failur(data);
-}
+typedef struct s_left_right {
+	size_t	left;
+	size_t	right;
+}	t_left_right;
+
+bool	ft_find_n_medians(t_int_array tab, t_int_array *median);
+
+#endif

@@ -6,45 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/24 10:06:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/27 12:35:41 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-/*
-static bool	ft_parse_string_to_int_array(t_int_array *out, char *str)
-{
-	size_t	index;
-	char	*tmp;
 
-	(*out) = (t_int_array){NULL, 0};
-	tmp = str;
-	while (*tmp)
-		out->len += ft_skiped(&tmp, ft_notspace);
-	out->array = ft_calloc(out->len, sizeof(int));
-	if (!out->array)
-		return (false);
-	index = 0;
-	while (*str && index < out->len)
-		if (!ft_atoi_to(&str, &out->array[index++]))
-			return (free(out->array), false);
-	return (true);
-}
-
-static bool	ft_join_int_array(t_int_array *out, t_int_array in)
-{
-	int	*tmp;
-
-	tmp = ft_calloc(out->len + in.len, sizeof(int));
-	if (!tmp)
-		return (false);
-	ft_memcpy(tmp, out->array, (out->len * sizeof(int)));
-	ft_memcpy(tmp + out->len, in.array, (in.len * sizeof(int)));
-	free(in.array);
-	free(out->array);
-	return (*out = (t_int_array){tmp, out->len + in.len}, true);
-}
-*/
 static bool	ft_check_double(t_int_array *out)
 {
 	size_t	index_a;
@@ -65,7 +32,7 @@ static bool	ft_check_double(t_int_array *out)
 	return (true);
 }
 
-static bool	ft_alloc_int_array(t_int_array *out, size_t len)
+bool	ft_alloc_int_array(t_int_array *out, size_t len)
 {
 	out->len = len;
 	out->array = ft_calloc(out->len, sizeof(int));
