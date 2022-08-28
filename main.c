@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/27 13:33:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:07:17 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 #include <stdio.h>
 
-void	print_int_ptr(int *ptr)
+void	print_int_ptr(int *ptr, bool show)
 {
-	printf("[ %11p - ", ptr);
+	if (show)
+		printf("[ %11p - ", ptr);
+	else
+		printf("[");
 	if (!ptr)
 		printf("%11c ]", '-');
 	else
@@ -27,12 +30,13 @@ void	print_int_ptr(int *ptr)
 void	print(t_stacks stacks)
 {
 	size_t	index;
+	bool	show_addr = false;
 
 	printf("\n------------------------------------------------------\n");
-	index = stacks.median.len;
+	index = 3;
 	printf("median len : %zu\n", index);
 	while (index--)
-		printf("%d ", stacks.median.array[index]);
+		printf("%d ", stacks.median[index]);
 	printf("\n------------------------------------------------------\n");
 	index = stacks.tab.len;
 	printf("stack\t\t\tA\t\tB\n");
@@ -40,8 +44,8 @@ void	print(t_stacks stacks)
 	while (index--)
 	{
 		printf("\n-%11zu- ", index);
-		print_int_ptr(stacks.a.data[index]);
-		print_int_ptr(stacks.b.data[index]);
+		print_int_ptr(stacks.a.data[index], show_addr);
+		print_int_ptr(stacks.b.data[index], show_addr);
 	}
 }
 
@@ -50,7 +54,8 @@ int	main(int ac, char *av[])
 	t_stacks	stacks;
 
 	if (!ft_new_stacks(&stacks, ac - 1, av + 1))
-		return (print(stacks), printf("error\n"), -1);
+		return (printf("error\n"), -1);
+
 	print(stacks);
 
 	ft_ra(&stacks);

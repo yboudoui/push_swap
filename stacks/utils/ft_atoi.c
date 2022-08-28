@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:49:18 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/22 15:06:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:03:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	ft_atoi_to(char **str, int *result)
 	while (ft_isdigit(**str))
 		out = (out * 10) + (*(*str)++ - '0');
 	out *= ((!!sign) * sign) + (!sign);
-	if (out < INT_MIN || out > INT_MAX)
+	if ((**str) || out < INT_MIN || out > INT_MAX)
 		return (false);
 	return (*result = out, true);
 }

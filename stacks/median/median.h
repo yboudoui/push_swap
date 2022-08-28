@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 10:00:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/27 13:17:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 08:43:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 # include "parse.h"
 
-typedef struct s_left_right {
-	size_t	left;
-	size_t	right;
-}	t_left_right;
-
-bool	ft_find_n_medians(t_int_array tab, t_int_array *median);
+bool	ft_find_n_medians(t_int_array tab, int *med);
 
 #endif

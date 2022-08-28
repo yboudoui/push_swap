@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:27:54 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/27 18:09:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 07:49:50 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STACKS_H
 
 # include "median.h"
-# define MEDIANS 5
 
 typedef int*	t_int_ptr;
 
@@ -25,7 +24,7 @@ typedef struct s_stack {
 
 typedef struct s_stacks {
 	t_int_array	tab;
-	t_int_array	median;
+	int			median[3];
 	t_stack		a;
 	t_stack		b;
 }	t_stacks;
