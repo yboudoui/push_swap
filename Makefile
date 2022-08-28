@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/27 13:09:43 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/08/28 15:30:48 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ MEDIAN_INC			=	$(addprefix $(MEDIAN_DIR),			\
 INSTRUCTION_DIR		=	instruction/
 
 INSTRUCTION_SRC		=	$(addprefix $(INSTRUCTION_DIR),		\
+						base.c								\
 						instruction.c						\
 						push.c								\
 						reverse_rotate.c					\
@@ -127,9 +128,11 @@ STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
 # **************************************************************************** #
 
 SRCS				=	$(STACKS_SRC)				\
+						print.c						\
 						main.c						\
 
 INCS				=	$(STACKS_INC)				\
+						.							\
 
 OBJS				=	$(SRCS:.c=.o)
 
@@ -144,6 +147,10 @@ $(NAME):	$(OBJS)
 		$(OBJS)
 
 all:		$(NAME)
+
+SET_ARG := $(ARG=$$(shuf -i 0-500 -n 20))
+test:	all
+		{ clear ; ARG=$$(shuf -i 0-500 -n 80) ; echo $$ARG ; ./push_swap $$ARG ; }
 
 clean:
 			$(RM) $(OBJS)

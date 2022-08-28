@@ -6,13 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 09:59:10 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 11:08:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:43:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "median.h"
 
-static bool	ft_last_element_is_median(int pivot, t_int_array tab)
+static void	ft_last_element_is_median(int pivot, t_int_array tab, int *median)
 {
 	size_t	index;
 	size_t	diff;
@@ -22,11 +22,12 @@ static bool	ft_last_element_is_median(int pivot, t_int_array tab)
 	while (index--)
 		diff += (tab.array[index] < pivot);
 	tab.len -= 1;
-	return (0
-		|| (diff == (tab.len / 4))
-		|| (diff == (tab.len / 2))
-		|| (diff == tab.len - (tab.len / 4))
-	);
+	if (diff == (tab.len / 4))
+		median[0] = pivot;
+	if (diff == (tab.len / 2))
+		median[1] = pivot;
+	if (diff == tab.len - (tab.len / 4))
+		median[2] = pivot;
 }
 
 bool	ft_find_n_medians(t_int_array tab, int *med)
@@ -36,8 +37,7 @@ bool	ft_find_n_medians(t_int_array tab, int *med)
 
 	med_index = 3;
 	tab_index = tab.len;
-	while (tab_index-- && med_index)
-		if (ft_last_element_is_median(tab.array[tab_index], tab))
-			med[--med_index] = tab.array[tab_index];
+	while (tab_index--)
+		ft_last_element_is_median(tab.array[tab_index], tab, med);
 	return (true);
 }

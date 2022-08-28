@@ -6,46 +6,51 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 11:07:17 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:10:37 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stacks.h"
-#include "instruction.h"
+#include "push_swap.h"
 
-#include <stdio.h>
+typedef bool	(*t_fp_eval)(int, int);
 
-void	print_int_ptr(int *ptr, bool show)
+bool	ft_lower_than(int a, int b)
 {
-	if (show)
-		printf("[ %11p - ", ptr);
-	else
-		printf("[");
-	if (!ptr)
-		printf("%11c ]", '-');
-	else
-		printf("%11d ]", *ptr);
+	return (a < b);
 }
 
-void	print(t_stacks stacks)
+bool	ft_lower_or_equal_than(int a, int b)
+{
+	return (a <= b);
+}
+
+bool	ft_have(t_stack st, t_fp_eval eval, int a)
 {
 	size_t	index;
-	bool	show_addr = false;
 
-	printf("\n------------------------------------------------------\n");
-	index = 3;
-	printf("median len : %zu\n", index);
-	while (index--)
-		printf("%d ", stacks.median[index]);
-	printf("\n------------------------------------------------------\n");
-	index = stacks.tab.len;
-	printf("stack\t\t\tA\t\tB\n");
-	printf("size\t\t\t%zu\t\t%zu\n", stacks.a.last_index, stacks.b.last_index);
-	while (index--)
+	index = st.last_index - 1;
+	while (index)
+		if (eval(*st.data[index--], a))
+			return (true);
+	return (false);
+}
+
+int	ft_get_last(t_stack st)
+{
+	return (*st.data[st.last_index - 1]);
+}
+
+void	ft_sort(t_stacks *stacks)
+{
+	t_instruction	inst;
+
+	while (ft_have(stacks->a, ft_lower_or_equal_than, stacks->median[1]))
 	{
-		printf("\n-%11zu- ", index);
-		print_int_ptr(stacks.a.data[index], show_addr);
-		print_int_ptr(stacks.b.data[index], show_addr);
+		if (ft_get_last(stacks->a) <= stacks->median[1])
+			inst = PB;
+		else
+			inst = RA;
+		ft_do_instruction(stacks, inst);
 	}
 }
 
@@ -54,45 +59,9 @@ int	main(int ac, char *av[])
 	t_stacks	stacks;
 
 	if (!ft_new_stacks(&stacks, ac - 1, av + 1))
-		return (printf("error\n"), -1);
-
+		return (write(1, "error\n", 6), -1);
 	print(stacks);
-
-	ft_ra(&stacks);
+	ft_sort(&stacks);
 	print(stacks);
-
-	ft_sa(&stacks);
-	print(stacks);
-
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	print(stacks);
-
-	ft_sb(&stacks);
-	ft_rra(&stacks);
-	print(stacks);
-
-	ft_ra(&stacks);
-	print(stacks);
-
-	ft_sa(&stacks);
-	print(stacks);
-
-
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-
-	print(stacks);
-
-	ft_sa(&stacks);
-	print(stacks);
-
-	ft_sb(&stacks);
-	print(stacks);
-
-	ft_free_stacks(stacks);
-	return (0);
+	return (ft_free_stacks(stacks), 0);
 }
