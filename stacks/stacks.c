@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 09:56:56 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:35:29 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,28 @@ void	ft_free_stacks(t_stacks out)
 	free(out.a.data);
 	free(out.b.data);
 	free(out.tab.array);
+}
+
+bool	ft_is_sorted(t_stacks stacks)
+{
+	size_t	index;
+
+	index = 0;
+	while ((1 + index) < stacks.a.last_index)
+	{
+		if (*stacks.a.data[index] <= *stacks.a.data[index + 1])
+			return (false);
+		index++;
+	}
+	return (true);
+}
+
+int	ft_last(t_stack st)
+{
+	return (*st.data[st.last_index - 1]);
+}
+
+int	ft_first(t_stack st)
+{
+	return (*st.data[0]);
 }

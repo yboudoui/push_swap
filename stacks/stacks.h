@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:27:54 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 07:49:50 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:35:52 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,8 @@ typedef struct s_stacks {
 
 bool	ft_new_stacks(t_stacks *out, int ac, char *av[]);
 void	ft_free_stacks(t_stacks out);
+bool	ft_is_sorted(t_stacks stacks);
+
+int	ft_last(t_stack st);
+int	ft_first(t_stack st);
 #endif
