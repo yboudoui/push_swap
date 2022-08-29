@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:33:23 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 14:28:12 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:16:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef enum e_instruction {
 	PA, PB,
 	RA, RB, RR,
 	RRA, RRB, RRR,
-	MAX_INSTRUCTION_SET
+	MAX_INSTRUCTION_SET,
+	NO_INSTRUCTION
 }	t_instruction;
 
 void	ft_do_instruction(t_stacks *stacks, t_instruction set);
