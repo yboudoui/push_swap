@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 15:05:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/29 12:55:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:39:36 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	*get_color(t_stacks st, int *ptr)
 	if (!ptr)
 		return (COLOR_NC);
 
-	if (*ptr <= st.median[1])
+	if (*ptr <= st.median[MEDIAN])
 	{
-		if (*ptr <= st.median[0])
+		if (*ptr <= st.median[Q1])
 			return (COLOR_YELLOW);
 		return (COLOR_RED);
 	}
-	if (*ptr > st.median[2])
+	if (*ptr > st.median[Q2])
 		return (COLOR_GREEN);
 	return (COLOR_BLUE);
 }
@@ -59,25 +59,32 @@ static void	print_int_ptr(char *color, int *ptr, bool show)
 		printf("%s%11d%s ]", color, *ptr, COLOR_NC);
 }
 
+static void	print_median(t_stacks stacks)
+{
+	size_t	index;
+
+	printf("\n------------------------------------------------------\n");
+	index = MAX_BOUND;
+	printf("median len : %zu\n", index);
+	while (index--)
+		printf("%d ", stacks.median[index]);
+	printf("\n------------------------------------------------------\n");
+}
+
 void	print(t_stacks stacks)
 {
 	size_t	index;
 	bool	show_addr = false;
 
-	printf("\n------------------------------------------------------\n");
-	index = 3;
-	printf("median len : %zu\n", index);
-	while (index--)
-		printf("%d ", stacks.median[index]);
-	printf("\n------------------------------------------------------\n");
-	index = stacks.tab.len;
+	print_median(stacks);
 	printf("stack\t\t\tA\t\tB\n");
-	printf("size\t\t\t%zu\t\t%zu\n", stacks.a.last_index, stacks.b.last_index);
+	printf("size\t\t\t%zu\t\t%zu\n", stacks.st[A].last_index, stacks.st[B].last_index);
+	index = stacks.tab.len;
 	while (index--)
 	{
 		printf("\n-%4zu- ", index);
-		print_int_ptr(get_color(stacks, stacks.a.data[index]), stacks.a.data[index], show_addr);
-		print_int_ptr(get_color(stacks, stacks.b.data[index]), stacks.b.data[index], show_addr);
+		print_int_ptr(get_color(stacks, stacks.st[A].data[index]), stacks.st[A].data[index], show_addr);
+		print_int_ptr(get_color(stacks, stacks.st[B].data[index]), stacks.st[B].data[index], show_addr);
 	}
 	printf("\n");
 }

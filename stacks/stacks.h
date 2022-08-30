@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:27:54 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/29 14:42:05 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:35:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ typedef struct s_stack {
 	size_t		last_index;
 }	t_stack;
 
+typedef enum e_stack_name {
+A, B, MAX_STACK_NAME
+}	t_stack_name;
+
 typedef struct s_stacks {
 	t_int_array	tab;
-	int			median[3];
-	t_stack		a;
-	t_stack		b;
+	t_median	median;
+	t_stack		st[MAX_STACK_NAME];
 }	t_stacks;
 
 bool	ft_new_stacks(t_stacks *out, int ac, char *av[]);

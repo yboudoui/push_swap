@@ -6,22 +6,19 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/30 14:13:14 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:25:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	ft_eval_lst(t_stacks *st, t_stack_name st_name, t_chunks ch, t_instruction inst)
+void	ft_eval_lst(t_stacks *st, t_chunks ch)
 {
-	int	value;
 
-	value = ft_get(st->st[st_name], -1);
-	while (ft_value_is_in_chunck(st->median, value, ch))
+	while (ft_value_is_in_chunck(st->median, ft_get(st->a, -1), ch))
 	{
-		ft_do_instruction(st, inst);
-		value = ft_get(st->st[st_name], -1);
+		ft_do_instruction(st, PB);
 	}
 }
 
@@ -34,12 +31,11 @@ t_instruction	ft_eval_b(t_stacks *stacks)
  		return (SB);
 */
 
-	value = ft_get(stacks->st[B], -1);
-	if (stacks->st[B].last_index > 1 && value > (*median)[Q1] && ft_get(stacks->st[B], -2) <= (*median)[Q1])
+	value = ft_get(stacks->b, -1);
+	if (stacks->b.last_index > 1 && value > (*median)[Q1] && ft_get(stacks->b, -2) <= (*median)[Q1])
  		return (RB);
 
-	ft_eval_lst(stacks, A, C1, PB);
-	ft_eval_lst(stacks, A, C2, PB);
+	ft_eval_lst(stacks, C1);
 /*
 	value = ft_get(stacks->a, -1);
 	if (value <= (*median)[MEDIAN])
@@ -54,7 +50,7 @@ t_instruction	ft_eval_a(t_stacks *stacks)
 	int			value;
 
 	median = &stacks->median;
-	value = ft_get(stacks->st[A], -1);
+	value = ft_get(stacks->a, -1);
 
 	if (ft_value_is_in_chunck(*median, value, C3))
 		return (RA);
