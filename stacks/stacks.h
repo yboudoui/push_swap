@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:27:54 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/30 13:35:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/31 07:31:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,9 @@ bool	ft_new_stacks(t_stacks *out, int ac, char *av[]);
 void	ft_free_stacks(t_stacks out);
 bool	ft_is_sorted(t_stacks stacks);
 
-int	ft_get(t_stack st, long int index);
+int		ft_get(t_stack st, long int index);
+bool	ft_at_least_two_elements(t_stack st);
+bool	ft_is_in_chunck(t_stacks st, t_stack_name st_name, int index, t_chunks chunks);
+bool	ft_are_in_chunck(t_stacks st, t_stack_name st_name, t_chunks chunks);
+
 #endif

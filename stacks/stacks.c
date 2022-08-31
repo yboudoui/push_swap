@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/30 13:32:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/31 09:47:46 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ bool	ft_is_sorted(t_stacks stacks)
 	size_t	index;
 
 	index = 0;
+	if (stacks.st[A].last_index != stacks.tab.len)
+		return (false);
 	while ((1 + index) < stacks.st[A].last_index)
 	{
 		if (*stacks.st[A].data[index] <= *stacks.st[A].data[index + 1])
@@ -83,4 +85,25 @@ int	ft_get(t_stack st, long int index)
 	printf("__%ld\n", index);
 */
 	return (*st.data[index]);
+}
+
+bool	ft_at_least_two_elements(t_stack st)
+{
+	return (st.last_index > 1);
+}
+
+bool	ft_is_in_chunck(t_stacks st, t_stack_name st_name, int index, t_chunks chunks)
+{
+	return (ft_witch_chunk(st.median, ft_get(st.st[st_name], index)) & chunks);
+}
+
+bool	ft_are_in_chunck(t_stacks st, t_stack_name st_name, t_chunks chunks)
+{
+	int	index;
+
+	index = st.st[st_name].last_index;
+	while (index--)
+		if (!ft_is_in_chunck(st, st_name, index, chunks))
+			return (false);
+	return (true);
 }

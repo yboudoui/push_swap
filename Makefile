@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/29 16:18:57 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/08/31 14:53:47 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,9 +148,11 @@ $(NAME):	$(OBJS)
 
 all:		$(NAME)
 
-SET_ARG := $(ARG=$$(shuf -i 0-500 -n 20))
-test:	all
+valgrind_test:	all
 		{ clear ; ARG=$$(shuf -i 0-500 -n 60) ; echo $$ARG ; valgrind ./push_swap $$ARG ; }
+
+test:	all
+		{ clear ; ARG=$$(shuf -i 0-9999 -n 60) ; ./push_swap $$ARG ; }
 
 clean:
 			$(RM) $(OBJS)

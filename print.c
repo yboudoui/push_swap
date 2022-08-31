@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 15:05:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/30 13:39:36 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/08/31 08:37:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static char	*get_color(t_stacks st, int *ptr)
 {
 	if (!ptr)
 		return (COLOR_NC);
-
 	if (*ptr <= st.median[MEDIAN])
 	{
 		if (*ptr <= st.median[Q1])
@@ -43,8 +42,8 @@ static char	*get_color(t_stacks st, int *ptr)
 		return (COLOR_RED);
 	}
 	if (*ptr > st.median[Q2])
-		return (COLOR_GREEN);
-	return (COLOR_BLUE);
+		return (COLOR_BLUE);
+	return (COLOR_GREEN);
 }
 
 static void	print_int_ptr(char *color, int *ptr, bool show)
