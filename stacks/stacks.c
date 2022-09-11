@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/31 09:47:46 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/10 15:30:17 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static bool	ft_alloc_stack_ab(t_stacks *out, int len)
 
 static bool	ft_set_stacks(t_stacks *out, int index)
 {
-	out->st[A].last_index = out->tab.len;
-	out->st[B].last_index = 0;
+	out->st[A].size = out->tab.len;
+	out->st[B].size = 0;
 	while (index--)
 	{
 		out->st[A].data[index] = &out->tab.array[index];
@@ -60,9 +60,9 @@ bool	ft_is_sorted(t_stacks stacks)
 	size_t	index;
 
 	index = 0;
-	if (stacks.st[A].last_index != stacks.tab.len)
+	if (stacks.st[A].size != stacks.tab.len)
 		return (false);
-	while ((1 + index) < stacks.st[A].last_index)
+	while ((1 + index) < stacks.st[A].size)
 	{
 		if (*stacks.st[A].data[index] <= *stacks.st[A].data[index + 1])
 			return (false);
@@ -71,37 +71,41 @@ bool	ft_is_sorted(t_stacks stacks)
 	return (true);
 }
 
-int	ft_get(t_stack st, long int index)
+int	mod(int a, int b)
 {
-	if (index < 0)
-		index = st.last_index + index;
+	int	modulo;
 
-	if (index < 0)
-		return (0);
-/*
-	_abs = index * ((index > 0) - (index < 0));
-	if (_abs > st.last_index)
-		index %= st.last_index;
-	printf("__%ld\n", index);
-*/
-	return (*st.data[index]);
+	modulo = a % b;
+	if (modulo < 0)
+		modulo += b;
+	return (modulo);
+}
+
+int	ft_get(t_stack st, int index)
+{
+	return (*st.data[mod(index, st.size)]);
 }
 
 bool	ft_at_least_two_elements(t_stack st)
 {
-	return (st.last_index > 1);
+	return (st.size > 1);
 }
 
 bool	ft_is_in_chunck(t_stacks st, t_stack_name st_name, int index, t_chunks chunks)
 {
-	return (ft_witch_chunk(st.median, ft_get(st.st[st_name], index)) & chunks);
+	int	value;
+
+	if (st.st[st_name].size < 2)
+		return (false);
+	value = ft_get(st.st[st_name], index);
+	return (ft_witch_chunk(st.median, value) & chunks);
 }
 
 bool	ft_are_in_chunck(t_stacks st, t_stack_name st_name, t_chunks chunks)
 {
 	int	index;
 
-	index = st.st[st_name].last_index;
+	index = st.st[st_name].size;
 	while (index--)
 		if (!ft_is_in_chunck(st, st_name, index, chunks))
 			return (false);

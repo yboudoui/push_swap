@@ -6,13 +6,13 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/08/31 16:07:08 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/09/11 15:10:45 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	push_swap
 
-CC					=	cc
+CC					=	gcc
 
 CFLAGS				=	-Wall -Wextra -Werror -g3
 
@@ -128,6 +128,7 @@ STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
 # **************************************************************************** #
 
 SRCS				=	$(STACKS_SRC)				\
+						sort.c						\
 						print.c						\
 						main.c						\
 
@@ -152,7 +153,13 @@ valgrind_test:	all
 		{ clear ; ARG=$$(shuf -i 0-500 -n 60) ; echo $$ARG ; valgrind ./push_swap $$ARG ; }
 
 test:	all
-		{ clear ; ARG=$$(shuf -i 0-9999 -n 500) ; ./push_swap $$ARG ; }
+		{ clear ; ARG=$$(shuf -i 0-999 -n 500) ; ./push_swap $$ARG ; }
+
+checker:
+		{ clear ; \
+		ARG=$$(shuf -i 0-999 -n 500) ; \
+		echo $$ARG ; \
+		./push_swap $$ARG | ./checker_linux $$ARG ; }
 
 clean:
 			$(RM) $(OBJS)

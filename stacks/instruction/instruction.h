@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:33:23 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/29 15:16:14 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:06:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ void	ft_rr(t_stacks *stacks);
 void	ft_rra(t_stacks *stacks);
 void	ft_rrb(t_stacks *stacks);
 void	ft_rrr(t_stacks *stacks);
-
-typedef enum e_instruction {
-	SA, SB, SS,
-	PA, PB,
-	RA, RB, RR,
-	RRA, RRB, RRR,
-	MAX_INSTRUCTION_SET,
-	NO_INSTRUCTION
-}	t_instruction;
 
 void	ft_do_instruction(t_stacks *stacks, t_instruction set);
 #endif
