@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:33:23 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/08 18:06:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/11 17:42:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef PRINT_INSTRUCTION
-# define PRINT_INSTRUCTION 1
+#  define PRINT_INSTRUCTION 1
 # endif
 
 void	ft_sa(t_stacks *stacks);

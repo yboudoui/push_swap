@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/21 13:56:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/11 17:36:01 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/09/11 17:05:55 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/09/11 17:46:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#ifndef SORT_H
+# define SORT_H
 
-int	main(int ac, char *av[])
-{
-	t_stacks	stacks;
+# include "push_swap.h"
 
-	if (ft_new_stacks(&stacks, ac - 1, av + 1))
-	{
-		ft_sort_by_chunks(&stacks);
-		ft_sort_by_values(&stacks);
-		return (ft_free_stacks(stacks), 0);
-	}
-	return (write(1, "error\n", 6), -1);
-}
+typedef struct s_best_index {
+	long int	a;
+	long int	b;
+	int			cost_a;
+	int			cost_b;
+}	t_best_index;
+
+void	ft_sort_by_values(t_stacks *st);
+#endif

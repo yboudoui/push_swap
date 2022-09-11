@@ -6,11 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:44:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/10 22:05:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/11 17:08:47 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "sort.h"
 
 static bool	ft_cmp_last_two(t_stacks st, t_stack_name name)
 {

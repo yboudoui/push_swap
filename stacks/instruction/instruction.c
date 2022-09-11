@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 18:33:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/08 18:07:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/11 17:41:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ typedef struct s_execution_set{
 }	t_execution_set;
 
 const t_execution_set	g_instruction_set[MAX_INSTRUCTION_SET] = {
-	[PA] = {ft_pa, "pa", 2},
-	[PB] = {ft_pb, "pb", 2},
-	[SA] = {ft_sa, "sa", 2}, [SB] = {ft_sb, "sb", 2}, [SS] = {ft_ss, "ss", 2},
-	[RA] = {ft_ra, "ra", 2}, [RB] = {ft_rb, "rb", 2}, [RR] = {ft_rr, "rr", 2},
-	[RRA] = {ft_rra, "rra", 3}, [RRB] = {ft_rrb, "rrb", 3}, [RRR] = {ft_rrr, "rrr", 3},
+[PA] = {ft_pa, "pa", 2}, [PB] = {ft_pb, "pb", 2},
+[SA] = {ft_sa, "sa", 2}, [SB] = {ft_sb, "sb", 2},
+[SS] = {ft_ss, "ss", 2},
+[RA] = {ft_ra, "ra", 2}, [RB] = {ft_rb, "rb", 2},
+[RR] = {ft_rr, "rr", 2},
+[RRA] = {ft_rra, "rra", 3}, [RRB] = {ft_rrb, "rrb", 3},
+[RRR] = {ft_rrr, "rrr", 3},
 };
 
 static void	ft_print_instruction(t_execution_set inst)

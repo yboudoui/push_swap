@@ -6,11 +6,18 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:26:59 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/10 15:30:17 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/09/11 17:45:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stacks.h"
+
+int	ft_relative_index(int index, int size)
+{
+	if ((size / 2) > index)
+		return (index);
+	return (size - index);
+}
 
 static bool	ft_alloc_stack_ab(t_stacks *out, int len)
 {
