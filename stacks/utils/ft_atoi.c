@@ -6,12 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:49:18 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/08/28 10:03:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:20:01 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "is_charset.h"
-#include <limits.h>
+#include "utils.h"
 
 bool	ft_atoi_to(char **str, int *result)
 {

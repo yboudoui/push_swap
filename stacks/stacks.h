@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:27:54 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/11 17:43:58 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:08:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ typedef struct s_stack {
 	unsigned int	size;
 }	t_stack;
 
-typedef enum e_stack_name {
+typedef enum e_name {
 	A = (1 << 0),
 	B = (1 << 1),
 	MAX_STACK_NAME = B + 1
-}	t_stack_name;
+}	t_name;
 
 typedef enum e_instruction_set {
 	_P = (1 << 2),
@@ -58,15 +58,13 @@ typedef struct s_stacks {
 }	t_stacks;
 
 bool	ft_new_stacks(t_stacks *out, int ac, char *av[]);
-void	ft_free_stacks(t_stacks out);
+void	ft_free_stacks(t_stacks *out);
 bool	ft_is_sorted(t_stacks stacks);
 
-int		mod(int a, int b);
 int		ft_relative_index(int index, int size);
 
 int		ft_get(t_stack st, int index);
-bool	ft_at_least_two_elements(t_stack st);
-bool	ft_is_in_chunck(t_stacks st, t_stack_name st_name, int index, t_chunks chunks);
-bool	ft_are_in_chunck(t_stacks st, t_stack_name st_name, t_chunks chunks);
+bool	ft_is_in_chunck(t_stacks st, t_name name, int index, t_chunks chunks);
+bool	ft_are_in_chunck(t_stacks st, t_name name, t_chunks chunks);
 
 #endif

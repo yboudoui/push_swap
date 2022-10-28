@@ -6,13 +6,13 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 21:08:55 by yboudoui          #+#    #+#              #
-#    Updated: 2022/09/11 17:36:09 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/10/25 17:06:32 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	push_swap
 
-CC					=	gcc
+CC					=	cc
 
 CFLAGS				=	-Wall -Wextra -Werror -g3
 
@@ -54,6 +54,7 @@ UTILS_DIR			=	utils/
 UTILS_SRC			=	$(addprefix $(UTILS_DIR),			\
 						$(MEMORY_SRC)						\
 						$(CHARSET_SRC)						\
+						ft_mod.c							\
 						ft_atoi.c							\
 						)
 
@@ -114,6 +115,7 @@ STACKS_SRC			=	$(addprefix $(STACKS_DIR),			\
 						$(PARSE_SRC)						\
 						$(MEDIAN_SRC)						\
 						$(INSTRUCTION_SRC)					\
+						init_stacks.c						\
 						stacks.c							\
 						)
 
@@ -127,13 +129,26 @@ STACKS_INC			=	$(addprefix $(STACKS_DIR),			\
 
 # **************************************************************************** #
 
+SORTS_DIR			=	sort/
+
+SORTS_SRC			=	$(addprefix $(SORTS_DIR),			\
+						sort.c								\
+						sort_by_value.c						\
+						sort_by_value_utils.c				\
+						)
+
+SORTS_INC			=	$(addprefix $(SORTS_DIR),			\
+						.									\
+						)
+
+# **************************************************************************** #
+
 SRCS				=	$(STACKS_SRC)				\
-						sort.c						\
-						sort_by_value.c				\
-						print.c						\
+						$(SORTS_SRC)				\
 						main.c						\
 
 INCS				=	$(STACKS_INC)				\
+						$(SORTS_INC)				\
 						.							\
 
 OBJS				=	$(SRCS:.c=.o)
@@ -150,18 +165,6 @@ $(NAME):	$(OBJS)
 
 all:		$(NAME)
 
-valgrind_test:	all
-		{ clear ; ARG=$$(shuf -i 0-500 -n 60) ; echo $$ARG ; valgrind ./push_swap $$ARG ; }
-
-test:	all
-		{ clear ; ARG=$$(shuf -i 0-9999 -n 500) ; ./push_swap $$ARG ; }
-
-checker:
-		{ clear ; \
-		ARG=$$(shuf -i 0-999 -n 500) ; \
-		echo $$ARG ; \
-		./push_swap $$ARG | ./checker_linux $$ARG ; }
-
 clean:
 			$(RM) $(OBJS)
 
@@ -169,3 +172,5 @@ fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean all
+
+.PHONY:		all clean fclean re

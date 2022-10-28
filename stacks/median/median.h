@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 10:00:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/11 17:40:18 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:47:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef enum e_chunks {
 	CHUNKS_ERROR = 0
 }	t_chunks;
 
-typedef int	t_median[MAX_BOUND];
+typedef int	t_median[5];
 
 bool		ft_find_n_medians(t_int_array tab, int *med);
 t_chunks	ft_witch_chunk(t_median median, int value);

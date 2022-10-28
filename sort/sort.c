@@ -6,24 +6,23 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:44:37 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/09/11 17:08:47 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:44:07 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 
-static bool	ft_cmp_last_two(t_stacks st, t_stack_name name)
+static bool	ft_cmp_last_two(t_stacks st, t_name name)
 {
 	return (1
-		&& ft_at_least_two_elements(st.st[name])
+		&& (st.st[name].size > 1)
 		&& (ft_get(st.st[name], -1) < ft_get(st.st[name], -2))
 	);
 }
 
-void	ft_sort_by_chunks(t_stacks *st)
+static void	send_second_and_third_chunk_to_b(t_stacks *st)
 {
 	t_instruction	inst;
-	int				last_value;
 
 	while (!ft_are_in_chunck(*st, A, C1 | C4))
 	{
@@ -36,6 +35,12 @@ void	ft_sort_by_chunks(t_stacks *st)
 			inst |= RA;
 		ft_do_instruction(st, inst);
 	}
+}
+
+static void	send_first_and_last_chunk_to_b(t_stacks *st)
+{
+	int	last_value;
+
 	while (st->st[A].size > 2)
 	{
 		last_value = ft_get(st->st[A], -1);
@@ -48,4 +53,10 @@ void	ft_sort_by_chunks(t_stacks *st)
 	}
 	if (ft_cmp_last_two(*st, A))
 		ft_do_instruction(st, SA);
+}
+
+void	ft_sort_by_chunks(t_stacks *st)
+{
+	send_second_and_third_chunk_to_b(st);
+	send_first_and_last_chunk_to_b(st);
 }
